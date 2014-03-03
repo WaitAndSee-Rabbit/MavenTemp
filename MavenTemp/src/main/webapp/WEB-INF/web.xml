@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!-- proxy pool -->
+	<servlet>
+		<servlet-name>ServletConfigurator</servlet-name>
+		<servlet-class>
+			org.logicalcobwebs.proxool.configuration.ServletConfigurator</servlet-class>
+		<init-param>
+			<param-name>xmlFile</param-name>
+			<param-value>WEB-INF/classes/global/proxool.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>dbmonitor</servlet-name>
+		<servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dbmonitor</servlet-name>
+		<url-pattern>/dbmonitor</url-pattern>
+	</servlet-mapping>
+	<!-- struts2 -->
+	<filter>
+		<filter-name>struts-cleanup</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
+	</filter>
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts-cleanup</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- index -->
+	<welcome-file-list>
+	    <welcome-file>login.xhtml</welcome-file>
+		<welcome-file>login.do</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!--spring config file -->
+	<context-param>
+		<!--contextConfigLocation -->
+		<param-name>contextConfigLocation</param-name>
+		<!--多个配置文件之间以，隔开 或者*号结束 /WEB-INF/applicationContext-*.xml -->
+		<param-value>/WEB-INF/classes/spring/applicationContext-*.xml</param-value>
+	</context-param>
+	<!--采用 listener创建 Applicat工 onContext实例 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<servlet>
+		<description>loginVerifyServlet</description>
+		<display-name>loginVerifyServlet</display-name>
+		<servlet-name>VerifyServlet</servlet-name>
+		<servlet-class>com.cjt.action.home.VerifyServlet</servlet-class>
+	</servlet>
+  <servlet-mapping>
+    <servlet-name>VerifyServlet</servlet-name>
+    <url-pattern>/servlet/VerifyServlet</url-pattern>
+  </servlet-mapping>
+  
+	<error-page>
+      <error-code>401</error-code>
+      <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+      <error-code>403</error-code>
+      <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+      <error-code>404</error-code>
+      <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+      <error-code>500</error-code>
+      <location>/error.jsp</location>
+    </error-page>
+     <error-page>
+      <error-code>502</error-code>
+      <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+      <error-code>503</error-code>
+      <location>/error.jsp</location>
+    </error-page>
+	<session-config>
+		<session-timeout>1440</session-timeout>
+	  </session-config>
+</web-app>

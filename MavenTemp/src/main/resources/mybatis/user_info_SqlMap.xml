@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user_info">
+
+	<resultMap type="com.cjt.bean.UserInfo" id="LUserInfo">
+		<result property="userID" column="USER_ID" />
+		<result property="loginID" column="LOGIN_ID" />
+		<result property="systemID" column="SYSTEM_ID" />
+		<result property="userCode" column="USER_CODE" />
+		<result property="duserCode" column="DUSER_CODE" />
+		<result property="passWord" column="PASSWORD" />
+		<result property="userName" column="USER_NAME" />
+		<result property="orgID" column="ORG_ID" />
+		<result property="status" column="STATUS" />
+		<result property="validDateBegin" column="VALIDDATE_BEGIN" />
+		<result property="validDateEnd" column="VALIDDATE_END" />
+		<result property="workTimeBegin" column="WORKTIME_BEGIN" />
+		<result property="workTimeEnd" column="WORKTIME_END" />
+		<result property="expiredDate" column="EXPIRED_DATE" />
+		<result property="loginCount" column="LOGIN_COUNT" />
+		<result property="mobileNO" column="MOBILE_NO" />
+		<result property="emailAddress" column="EMAIL_ADDRESS" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="isDelete" column="IS_DELETE" />
+		<result property="delUser" column="DEL_USER" />
+		<result property="createdDate" column="CREATED_DATE" />
+		<result property="shopId" column="SHOP_ID" />
+	</resultMap>
+
+	<select id="selectUserInfoForLonginId" resultType="userInfo"
+		parameterType="String">
+		select
+		user_id as "userID" ,
+		login_id AS "loginID",
+		password as "passWord",
+		user_name
+		as "userName",
+		shop_id as "shopId"
+		from
+		ntsp.user_info
+		where login_id=#{id}
+    </select>
+
+
+	<!-- 查询指定用户ID的用户 -->
+	<select id="selectUserInfoForID" resultType="userInfo"
+		parameterType="String">
+		select
+		user_id as "userID" ,
+		login_id AS "loginID",
+		password as "passWord",
+		user_name
+		as "userName",
+		shop_id as "shopId"
+		from
+		ntsp.user_info
+		where user_id=#{id}
+    </select>
+
+
+	<!-- 查询指定商店的全部用户  分页查询-->
+	<select id="getUserInfosByShopId" parameterType="java.util.Map"
+		resultMap="LUserInfo">
+		<![CDATA[
+      select 
+      	u.USER_ID,
+        u.LOGIN_ID,
+        u.SYSTEM_ID,
+        u.USER_CODE,
+        u.DUSER_CODE,
+        u.PASSWORD,
+        u.USER_NAME,
+        u.ORG_ID,
+        u.STATUS,
+        u.VALIDDATE_BEGIN,
+        u.VALIDDATE_END,
+        u.WORKTIME_BEGIN,
+        u.WORKTIME_END,
+        u.EXPIRED_DATE,
+        u.LOGIN_COUNT,
+        u.MOBILE_NO,
+        u.DESCRIPTION,
+        u.EMAIL_ADDRESS,
+        u.IS_DELETE,
+        u.DEL_USER,
+        u.CREATED_DATE,
+        u.SHOP_ID from (select b.*,rownum as num from (select * from ntsp.user_info a  where a.shop_id=#{shopId} order by a.user_id desc) b where rownum<=#{end}) u where u.num>#{start}
+      		]]>
+	</select>
+
+	<!-- 查询指定商店的全部用户数 -->
+
+	<select id="getCountUserInfosByShopId" parameterType="String"
+		resultType="int">
+
+		select count(*) from ntsp.user_info au where au.shop_id =
+		#{shopId}
+	
+	</select>
+
+	<!-- 查询指定userID的用户 -->
+	<select id="selectUserInfoByUserId" parameterType="String"
+		resultMap="LUserInfo">
+
+		select
+		u.USER_ID,
+		u.LOGIN_ID,
+		u.SYSTEM_ID,
+		u.USER_CODE,
+		u.DUSER_CODE,
+		u.PASSWORD,
+		u.USER_NAME,
+		u.ORG_ID,
+		u.STATUS,
+		u.VALIDDATE_BEGIN,
+		u.VALIDDATE_END,
+		u.WORKTIME_BEGIN,
+		u.WORKTIME_END,
+		u.EXPIRED_DATE,
+		u.LOGIN_COUNT,
+		u.MOBILE_NO,
+		u.DESCRIPTION,
+		u.EMAIL_ADDRESS,
+		u.IS_DELETE,
+		u.DEL_USER,
+		u.CREATED_DATE,
+		u.SHOP_ID from
+		ntsp.user_info u where u.user_id=#{userID}
+
+	</select>
+
+	<!-- 添加用户  -->
+	<insert id="insertUserInfo" parameterType="userInfo">
+
+		<selectKey resultType="int" keyProperty="userID" order="BEFORE">
+			select seq_user.nextval as userID from dual
+		</selectKey>
+
+		insert into
+		ntsp.user_info(user_id,login_id,system_id,user_code,duser_code,password,user_name,org_id,status,validdate_begin,validdate_end,worktime_begin,worktime_end,expired_date,login_count,mobile_no,email_address,description,is_delete,del_user,created_date,shop_id)
+		values(#{userID,jdbcType=NUMERIC},#{loginID,jdbcType=VARCHAR},
+		#{systemID,jdbcType=VARCHAR},#{userCode,jdbcType=VARCHAR},#{duserCode,jdbcType=VARCHAR},
+		#{passWord,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},
+		#{orgID,jdbcType=VARCHAR},#{status,jdbcType=NUMERIC},#{validDateBegin,jdbcType=VARCHAR},
+		#{validDateEnd,jdbcType=VARCHAR},#{workTimeBegin,jdbcType=NUMERIC},
+		#{workTimeEnd,jdbcType=NUMERIC},#{expiredDate,jdbcType=VARCHAR},
+		#{loginCount,jdbcType=NUMERIC},#{mobileNO,jdbcType=VARCHAR},#{emailAddress,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},#{isDelete,jdbcType=NUMERIC},#{delUser,jdbcType=VARCHAR},
+		sysdate,#{shopId})
+	</insert>
+
+
+	<!-- 更新指定userID的用户-->
+	<update id="updateUserInfo" parameterType="userInfo">
+
+
+		update ntsp.user_info
+		set
+		login_id=#{loginID,jdbcType=VARCHAR},system_id=#{systemID,jdbcType=VARCHAR},user_code=#{userCode,jdbcType=VARCHAR},
+		duser_code=#{userCode,jdbcType=VARCHAR},password=#{passWord,jdbcType=VARCHAR},user_name=#{userName,jdbcType=VARCHAR},org_id=#{orgID,jdbcType=VARCHAR},status=#{status,jdbcType=NUMERIC},
+		validdate_begin=#{validDateBegin,jdbcType=VARCHAR},validdate_end=#{validDateEnd,jdbcType=VARCHAR},worktime_begin=#{workTimeBegin,jdbcType=NUMERIC},
+		worktime_end=#{workTimeEnd,jdbcType=NUMERIC},expired_date=#{expiredDate,jdbcType=VARCHAR},login_count=#{loginCount,jdbcType=NUMERIC},mobile_no=#{mobileNO,jdbcType=VARCHAR},
+		email_address=#{emailAddress,jdbcType=VARCHAR},description=#{description,jdbcType=VARCHAR},is_delete=#{isDelete,jdbcType=NUMERIC},del_user=#{delUser,jdbcType=VARCHAR}
+		where user_id=#{userID}
+		
+	</update>
+
+	<!-- 删除指定用户 -->
+	<delete id="deleteUserInfoByUserId" parameterType="int">
+
+		delete from ntsp.user_info u where u.user_id=#{userID}
+	
+	</delete>
+
+	<!-- 检查用户ID的唯一性 -->
+	<select id="checkUserExist" parameterType="String" resultType="int">
+		select count(1) from user_info ui where ui.login_id = #{key}
+	</select>
+
+	<!-- 更新密码 -->
+	<select id="changeMyPassWord" parameterType="userInfo">
+		
+		update ntsp.user_info
+		set
+		password=#{passWord,jdbcType=VARCHAR}
+		where user_id=#{userID}
+	
+	</select>
+
+
+</mapper>

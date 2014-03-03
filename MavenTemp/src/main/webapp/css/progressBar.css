@@ -1,0 +1,65 @@
+.progressDiv { 
+	margin: 3px 0;
+	padding: 0;
+	float: none;
+}
+
+.progressDiv label {
+	float: left;
+	font-size: 10px;
+	font-weight: bold;
+	margin: 6px 2px;
+	padding: 0;
+}
+
+#progressBar {
+	background: #d8ebfa;
+	height: 24px;
+	vertical-align: middle;
+	width: 216px;
+	float: left;
+	position: relative;
+}
+
+#progressBar span {
+	height: 6px;
+	margin: 9px 0px;
+	padding: 0;
+	display: block;
+	font-size: 6px;
+}
+
+#progressBar .finished {
+	background: #0063A6;
+	width: 0;
+	float: left;
+	cursor: pointer;
+}
+
+#progressBar .remainder {
+	background: #626D7E;
+	width: 200px;
+	float: left;
+	cursor: pointer;
+}
+
+#progressBar .moveBar {
+	margin: 2px 0 2px 0;
+	padding: 0;
+	width: 16px;
+	height: 20px;
+	background-color: #ccc;
+	float: left;
+	left: 0px;
+	font-size: 10px;
+	cursor: pointer;
+}
+
+#progressBarSign {
+	height: 14px;
+	margin: 5px;
+	width: 260px;
+	padding:0;
+	font-size: 12px;
+	float: left;
+}

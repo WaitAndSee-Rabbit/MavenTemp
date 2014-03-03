@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<include file="struts/struts-authentication.xml" />
+
+	<package name="struts2-login" namespace="/login" extends="struts-authentication">
+	
+		<action name="index" class="loginAction" method="indexFrame">
+			<result name="input">../login/login.jsp</result>
+			<result name="exit" type="redirect">../login/index.do</result>
+			<result name="success" type="redirect">../home/index.do</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+	</package>
+
+	<package name="struts-json" extends="json-default">
+		<interceptors>
+			<interceptor name="authentication" class="AuthenticationInterceptor" />
+			<interceptor-stack name="authenticationStack">
+				<interceptor-ref name="authentication"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="authenticationStack"></default-interceptor-ref>
+		<!-- auth fail ,goto login.do -->
+		<global-results>
+			<result name="login" type="redirect">/login/index.do</result>
+		</global-results>
+	</package>
+
+
+	<package name="struts2-home" namespace="/home" extends="struts-json">
+		<!-- 通配符处理 -->
+		<action name="*" class="mainAction" method="{1}Frame">
+			<result>../home/index.jsp</result>
+			<result name="indexMenu">../home/menu.jsp</result>
+			<result name="leftMenu">../home/leftMenu.jsp</result>
+		</action>
+	</package>
+
+	<package name="struts2-vehicleTrack" namespace="/vehicleTrack"
+		extends="struts-json">
+		<!-- 车辆追踪 -->
+		<action name="*" class="vehicleTrackAction" method="{1}Frame">
+			<result name="fixedPosition" type="json">
+				<param name="root">carInfoMap</param>
+			</result>
+			<result name="curPosition" type="json">
+				<param name="root">carInfoMap</param>
+			</result>
+			<result name="monitorTrack" type="json">
+				<param name="root">carInfoMap</param>
+			</result>
+			<result name="stopMonitor" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="toPlay">../vehicleTrack/historyTrackPlay.jsp</result>
+			<result name="carHistoryTrack" type="json">
+				<param name="root">heartInfos</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="struts2-tree" namespace="/customerTree" extends="struts-json">
+		<!-- 通配符处理 -->
+		<action name="*" class="customerTreeAction" method="{1}Frame">
+			<result name="toCustomerTreeFrame">../customerTree/tree.jsp</result>
+			<result name="toAdSearch">../customerTree/adSearch.jsp</result>
+			<result name="customcerTree" type="json">
+				<param name="root">root</param>
+			</result>
+
+		</action>
+	</package>
+
+	<package name="systemManage" namespace="/systemManage" extends="struts-json">
+		<!-- 人员管理 -->
+		<action name="systemManage_*" class="UserAction" method="{1}">
+			<result name="GainUserInfoSForPage">/systemManage/userList.jsp</result>
+			<result name="GoToControl">/systemManage/Control.jsp</result>
+			<result name="GoToRightTitle">/systemManage/rightTitle.jsp</result>
+			<result name="GoToChangeMyPWD">/systemManage/changeMySelfPwd.jsp</result>
+		</action>
+	
+		<!-- 平台转移 -->		
+		<action name="shopChange_*" class="shopChangeAction" method="{1}">
+				<result name="goToChangeMyShopId">/systemManage/changeMyShop.jsp</result>
+		</action>
+		
+	</package>
+
+	<package name="bookmark" namespace="/bookmark" extends="struts-json">
+		<!-- 目的地管理 -->
+		<action name="bookmark_*" class="DestPoiAction" method="{1}">
+			<result name="GainDestPoisForPage">/bookmark/destPoiList.jsp</result>
+			<result name="GainDestPoiWithUnKnowForPage">/bookmark/destPoiList.jsp</result>
+			<result name="GainDestPoiByID">/bookmark/uPdatePoi.jsp</result>
+			<result name="GoToControl">/bookmark/Control.jsp</result>
+			<result name="GoToRightTitle">/bookmark/rightTitle.jsp</result>
+		</action>
+	</package>
+
+	<package name="regionManage" namespace="/regionManage" extends="struts-json">
+		<!--区域管理 -->
+		<action name="regionManage_*" class="RegionInfoAction" method="{1}">
+			<result name="GainRegionInfoWithUnKnowForPage">/regionManage/regionInfoList.jsp</result>
+			<result name="GainRegionInfoByID">/regionManage/uPdateRegionInfo.jsp</result>
+			<result name="GoToControl">/regionManage/Control.jsp</result>
+			<result name="GoToRightTitle">/regionManage/rightTitle.jsp</result>
+		</action>
+	</package>
+
+	<package name="noticeInfo" namespace="/noticeInfo" extends="struts-json">
+		<!--通知管理-->
+		<action name="noticeInfo_*" class="noticeInfoAction" method="{1}">
+			<result name="GainNoticeInfoWithUnKnowForPage">/noticeInfo/noticeInfoList.jsp</result>
+			<result name="GainNoticeInfoByID">/noticeInfo/uPdateNoticeInfo.jsp</result>
+			<result name="GoToControl">/noticeInfo/Control.jsp</result>
+			<result name="GoToRightTitle">/noticeInfo/rightTitle.jsp</result>
+		</action>
+	</package>
+
+
+	<package name="vehicleTask" namespace="/vehicleTask" extends="struts-json">
+		<!-- 车辆任务 -->
+		<action name="*" class="vehicleTaskAction" method="{1}Frame">
+			<result name="toVehiclePOI">../vehicleTask/vehiclePOI.jsp</result>
+			<result name="searchDestPOI">../vehicleTask/destPOIList.jsp</result>
+			<result name="goToCarTaskFrame">../vehicleTask/destPoiControl.jsp</result>
+			<result name="destPOIInfo" type="json">
+				<param name="root">destPoi</param>
+			</result>
+			<result name="sendDestPOI" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="toSendNotice">../vehicleTask/sendNotice.jsp</result>
+			<result name="searchNotice">../vehicleTask/noticeList.jsp</result>
+			<result name="noticeInfo" type="json">
+				<param name="root">noticeInfo</param>
+			</result>
+			<result name="goToQueryJiChuPoisFrame">../vehicleTask/jiChuControl.jsp</result>
+			<result name="jiChuPageFrame">../vehicleTask/jiChuPoiList.jsp</result>
+		</action>
+	</package>
+
+
+	<package name="vehicleRescue" namespace="/vehicleRescue"
+		extends="struts-json">
+		<!-- 驾驶救援 -->
+		<action name="vehicleRescue_*" class="vehicleRescueAction"
+			method="{1}">
+			<result name="gotoVehicleRescueControl">/vehicleRescue/rescueControl.jsp</result>
+			<result name="gotoRightTitle">/vehicleRescue/rightTitle.jsp</result>
+			<result name="gainAssistInfoWithUnKnowForPage">/vehicleRescue/rescueList.jsp</result>
+			<result name="continueRescue">/vehicleRescue/attentionRescue.jsp</result>
+			<result name="toPlayRescueTrack">/vehicleRescue/historyTrackPlay.jsp</result>
+		</action>
+	</package>
+
+
+	<package name="cityInfo" namespace="/cityInfo" extends="struts-json">
+		<!--城市信息查询-->
+		<action name="cityInfo_*" class="cityInfoAction" method="{1}">
+		</action>
+	</package>
+
+	<package name="roleInfo" namespace="/roleInfo" extends="struts-json">
+		<!--角色管理-->
+		<action name="roleInfo_*" class="roleInfoAction" method="{1}">
+			<result name="GainAllRoleInfo">/systemManage/userBindRole.jsp</result>
+		</action>
+	</package>
+
+
+	<package name="vehicleAlarm" namespace="/vehicleAlarm" extends="struts-json">
+		<action name="*" class="vehicleAlarmAction" method="{1}Frame">
+			<result name="toSetCarRegion">../vehicleAlarm/setCarRegion.jsp</result>
+			<result name="toSetRegion">../vehicleAlarm/setRegion.jsp</result>
+			<result name="searchRegionInfo">../vehicleAlarm/regionList.jsp</result>
+			<result name="regionInfo" type="json">
+				<param name="root">regionInfo</param>
+			</result>
+			<result name="saveFence" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="toCarFence">../vehicleAlarm/carFence.jsp</result>
+			<result name="selectCarBindRegion">../vehicleAlarm/carFenceList.jsp</result>
+			<result name="delCarBindRegion" type="json">
+				<param name="root">flag</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="maintain" namespace="/maintain" extends="struts-json">
+		<action name="*" class="maintainAction" method="{1}Frame">
+			<result name="toMaintainManager">../maintain/maintainManager.jsp</result>
+			<result name="carInfoPage">../maintain/vehicleList.jsp</result>
+			<result name="maintain">../maintain/maintain.jsp</result>
+			<result name="saveMaintain" type="json">
+				<param name="root">flag</param>
+			</result>
+			<result name="searchMaintain">../maintain/maintainSearch.jsp</result>
+			<result name="maintainPage">../maintain/maintainList.jsp</result>
+		</action>
+	</package>
+
+
+	<constant name="struts.custom.i18n.resources" value="globalMessages" />
+</struts>

@@ -1,0 +1,218 @@
+html {
+	color: #111;
+	background: #fff
+}
+
+body,div,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,blockquote
+	{
+	margin: 0;
+	padding: 0
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+fieldset,img {
+	border: 0
+}
+
+address,caption,cite,code,dfn,em,i,strong,th,var,optgroup {
+	font-style: normal;
+	font-weight: normal
+}
+
+ul,ol {
+	list-style: none
+}
+
+caption,th {
+	text-align: left
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size: 100%;
+	font-weight: normal
+}
+
+q:before,q:after {
+	content: ''
+}
+
+abbr,acronym {
+	border: 0;
+	font-variant: normal
+}
+
+sup {
+	vertical-align: baseline
+}
+
+sub {
+	vertical-align: baseline
+}
+
+legend {
+	color: #000
+}
+
+input,button,textarea,select,optgroup,option {
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit
+}
+
+input,button,textarea,select { *
+	font-size: 100%
+}
+
+pre {
+	white-space: pre-wrap;
+	word-wrap: break-word
+}
+
+a {
+	cursor: pointer
+}
+
+a:link {
+	color: #37a;
+	text-decoration: none
+}
+
+a:visited {
+	color: #669;
+	text-decoration: none
+}
+
+a:hover {
+	color: #fff;
+	text-decoration: none;
+	background: #37a
+}
+
+a:active {
+	color: #fff;
+	text-decoration: none;
+	background: #f93
+}
+
+a img {
+	border-width: 0;
+	vertical-align: middle
+}
+
+body,td,th {
+	font: 12px Arial, Helvetica, sans-serif;
+	line-height: 1.62
+}
+
+table {
+	border-collapse: collapse;
+	border: 0;
+	padding: 0;
+	margin: 0
+}
+
+wbr:after {
+	content: "\00200B"
+}
+
+textarea {
+	resize: none
+}
+
+input[type=text]:focus,input[type=password]:focus,textarea:focus {
+	outline: 0
+}
+
+h1 {
+	word-wrap: break-word;
+	display: block;
+	font-size: 25px;
+	font-weight: bold;
+	color: #494949;
+	margin: 0;
+	padding: 0 0 15px 0;
+	line-height: 1.1
+}
+
+h2 {
+	font: 15px Arial, Helvetica, sans-serif;
+	color: #072;
+	margin: 0 0 12px 0;
+	line-height: 150%
+}
+
+#wrapper {
+	width: 950px;
+	margin: 0 auto
+}
+
+#content {
+	min-height: 420px
+}
+
+.grid-16-8 .article {
+	float: left;
+	width: 590px;
+	padding-right: 40px
+}
+
+.grid-16-8 .article .switch-to-shuo {
+	float: right;
+	margin-top: -45px
+}
+
+.grid-16-8 .article .switch-to-shuo a {
+	display: block;
+	width: 134px;
+	height: 38px;
+	background: url(http://img3.douban.com/pics/switch_to_shuo.png)
+		no-repeat left top
+}
+
+.attn {
+	color: #FF3300;
+}
+
+.m {
+	font-size: 14px;
+	line-height: 120%;
+	color: #006600;
+}
+
+.m a,.m a:visited,a.m,a.m:visited {
+	font-size: 14px;
+	line-height: 120%;
+	color: #006600;
+	text-decoration: none;
+}
+
+.m a:hover,a.m:hover {
+	font-size: 14px;
+	line-height: 120%;
+	color: #fff;
+	text-decoration: none;
+	background: #006600;
+}
+
+.m a:active,a.m:active {
+	color: #fff;
+	text-decoration: none;
+	background: #FFAAFF;
+}
+
+.pl2,.pl {
+	color: #666;
+}
+
+.item {
+	margin-bottom: 1.5em;
+}
+
+.single-nav {
+	padding-top: 30px;
+}

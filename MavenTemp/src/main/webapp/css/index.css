@@ -1,0 +1,166 @@
+html,body{
+	height:100%; width:100%; overflow:hidden; padding:0px; margin:0px; border:none;}
+body{
+	background:#fff;
+}
+.top {
+	background-color: #2d2d2d;
+	width:100%;
+	height:29px;
+	color:#FFFFFF;
+	vertical-align:middle;
+	line-height:29px;
+	overflow:hidden;
+}
+
+.menu{
+	width:100%;
+	height:69px;
+	color:#FFFFFF;
+	vertical-align:middle;
+	line-height:69px;
+	overflow:hidden;
+	background:url(../images/hbg.png) repeat-x;
+}
+#menu img{
+	margin-right:10px;
+	margin-left:10px;
+}
+
+#center{
+	margin-top:5px;
+	width:100%;
+}
+
+
+#leftPanel{
+	width:260px;
+	float:left;
+	margin-left:1px;
+}
+#rightPanel{
+	float:right;
+	margin-right:2px;
+}
+
+#foot{
+	width:100%;
+	height:25px;
+	background:#c0c0c0;
+	vertical-align:middle;
+	line-height:29px;
+	text-align:right;
+	position:absolute;
+	left:0px;
+	bottom:0px;
+}
+
+.elink{
+	font-size:14px;
+}
+
+
+.rtittle{
+	width:100%;
+	height:34px;
+	line-height:34px;
+	vertical-align:middle;
+	margin-top:0px;
+	background:url(../images/r2.jpg) repeat-x;
+	overflow:hidden;
+}
+.rcontent{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	border:1px solid #939292;
+	background-color:#f6f6f6;
+	overflow-y:auto; 	
+	overflow-x:auto;
+}
+
+.ltittle{
+	width:100%;
+	height:36px;
+	line-height:36px;
+	vertical-align:middle;
+	background:url(../images/tittle.jpg) no-repeat;
+}
+.white f {
+	font-size:14px;
+}
+.lcontain{
+	width:98%;
+	margin-left:2px;
+	border:solid 1px #b9bec0;
+	background-color:#f6f6f6;
+	overflow:hidden;
+	position:relative;
+}
+
+.bt{
+	width:250px;
+	height:34px;
+	line-height:34px;
+	padding-left:5px;
+	border:1px solid #b6bfc6;
+	background-color:#e5e6e7;
+	overflow:hidden;
+	margin-left:2px;
+}
+
+.ufont{
+	font:12px;
+	text-decoration:underline;
+	color:#000000;
+}
+
+.conpad{
+	width:100%;
+	height:200px;
+	left:0px;
+	bottom:0px;
+}
+
+.cfont{
+	font-size:14px;
+	padding-left:10px;
+}
+
+.concontent{
+	width:260px;
+	padding:10px;
+	background-color:#f6f6f6;
+}
+.concontent ul{
+	padding:0px;
+	margin:0px;
+}
+.concontent ul li{
+	width:100%;
+	height:35px;
+	line-height:35px;
+	font-size:14px;
+	border-bottom:1px dotted #CCC;
+}
+.concontent ul li img{
+	margin-right:20px;
+}
+.concontent ul li a{
+	text-decoration:none;
+}
+.concontent ul li a:hover{
+	text-decoration:none;
+}
+
+
+<!---tree-->
+div.zTreeDemoBackground {
+	width: 90%;
+	text-align: left;
+}
+ul.ztree {
+	margin-top: 1px;
+	border: 0px solid #617775;
+	background: #fff;
+}

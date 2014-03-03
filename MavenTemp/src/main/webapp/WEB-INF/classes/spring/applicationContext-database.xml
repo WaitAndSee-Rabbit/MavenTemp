@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+
+	<!-- TSP数据源 -->
+	<bean id="dataSourceTsp"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.logicalcobwebs.proxool.ProxoolDriver" />
+		<property name="url" value="proxool.db-tsp" />
+	</bean>
+	<bean id="sqlSessionFactoryTsp" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceTsp" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+	</bean>
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryTsp" />
+	</bean>
+	
+	
+	<!-- 心跳报 数据源 -->
+	<bean id="dataSourceHeart" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.logicalcobwebs.proxool.ProxoolDriver" />
+		<property name="url" value="proxool.db-heart" />
+	</bean>
+	<bean id="sqlSessionFactoryHeart" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceHeart" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+	</bean>
+	<bean id="sqlSessionHeart" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryHeart" />
+	</bean>
+
+    <!-- 数据连接 -->
+	<bean id="abstractDB" class="com.cityonmap.tsp.database.AbstractDB"
+		abstract="true">
+		<property name="session" ref="sqlSession"></property>
+		<property name="sessionHeart" ref="sqlSessionHeart"></property>
+	</bean>
+</beans>
